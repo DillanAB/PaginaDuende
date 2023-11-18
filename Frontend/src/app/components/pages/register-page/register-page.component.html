@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="details">
+        <h1>Registro</h1>
+        <form [formGroup]="registerForm" (ngSubmit)="submit()">
+            <text-inputs
+                [control]="fc.name"
+                [showErrorsWhen]="isSubmitted"
+                label="Nombre">
+            </text-inputs>
+
+            <text-inputs
+            [control]="fc.email"
+            [showErrorsWhen]="isSubmitted"
+            label="Email"
+            type="email">
+            </text-inputs>
+
+            <text-inputs
+            [control]="fc.password"
+            [showErrorsWhen]="isSubmitted"
+            label="Contraseña"
+            type="password">
+            </text-inputs>
+
+            <text-inputs
+            [control]="fc.confirmPassword"
+            [showErrorsWhen]="isSubmitted"
+            label="Confirme la contraseña"
+            type="password">
+            </text-inputs>
+
+            <default-button text="Registrar"></default-button>
+        </form>
+    </div>
+</div>

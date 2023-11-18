@@ -1,0 +1,13 @@
+{
+  "name": "codigo",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=18 <19"
+  },
+  "scripts": {
+    "dev": "cd Frontend && npm start & cd Backend && npm start",
+    "start": "cd Backend/built && node server.js",
+    "prebuild": "cd Backend && npm run build",
+    "build": "cd Frontend && npm run build"
+  }
+}

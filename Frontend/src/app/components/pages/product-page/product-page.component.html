@@ -1,0 +1,27 @@
+<div class="container">
+    <img [src]="product.imageURL" [alt]="product.name">
+     <div class="details">
+        <div class="header">
+            <span class="name">
+                {{product.name}}
+            </span>
+        </div>
+
+        <div class="price">
+            <span>
+                {{product.price | currency}}
+            </span>
+        </div>
+
+        <div class="quantity">
+            <input 
+                [(ngModel)]="quantity"
+                type="number" 
+                min="1"
+                [max]="product.availability" 
+                >
+        </div>
+        
+        <button (click)="addToCart(quantity)">Agregar al carrito<i></i></button>
+     </div>
+</div>

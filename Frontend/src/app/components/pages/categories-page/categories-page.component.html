@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrar categorías y subcategorías</title>
+</head>
+<body>
+  <h1>Administrar categorías y subcategorías</h1>
+
+
+  <div *ngIf="showEditForm">
+    <form (submit)="submitCategory()" id="newCategoryForm">
+      <text-inputs
+          [control]="fc.name"
+          [showErrorsWhen]="isSubmitted"
+          label="Nuevo nombre">
+      </text-inputs>
+      <button type="submit">Aceptar</button>
+      <button (click)="cancelEdit()">Cancelar</button>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>
+          Categorías
+          <button (click)="createCategory()">Crear</button>
+        </th>
+        <th>Subcategorías</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <!-- <td> <ul><li *ngFor="let cat of makeupCats" class="menu"> {{ cat.id }} </li></ul> </td> -->
+            <td> <ul><li *ngFor="let cat of makeupCats" class="menu"> 
+                {{ cat.name }}
+                <button (click)="editCategory(cat)">Editar</button>
+                <button (click)="createSubcategory(cat)">Crear sub</button>
+              </li></ul> </td>
+            <td> 
+                <li *ngFor="let cat of makeupCats" class="menu">
+                    <ul>
+                        <li *ngFor="let subcat of cat.subcategories" class="menu">
+                            {{ subcat.name }}
+                            <button (click)="editSubCategory(cat, subcat)">Editar</button>
+                        </li>
+                    </ul>
+                </li>
+            </td>
+        </tr>
+      </tbody>
+  </table>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="app.js"></script> -->
+</body>
+</html>
+

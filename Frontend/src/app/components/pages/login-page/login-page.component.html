@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="details">
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <text-inputs
+                [control]="fc.email"
+                [showErrorsWhen]="isSubmitted"
+                autocomplete="on"
+                type="email"
+                label="Email">
+            </text-inputs>
+
+            <text-inputs
+                [control]="fc.password"
+                [showErrorsWhen]="isSubmitted"
+                type="password"
+                label="Contraseña">
+            </text-inputs>
+            
+            <default-button text="Iniciar sesión"></default-button>
+        </form>
+    </div>
+
+    <div class="button">
+        <a href="/register">Crear cuenta</a>
+    </div>
+</div>

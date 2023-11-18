@@ -1,0 +1,98 @@
+<!-- Filtro por categorias y subcategorias -->
+<ul>
+    <li *ngFor="let category of makeupCats" class="menu" (mouseenter)="showSubcategories = category" (mouseleave)="showSubcategories = null">
+        <a routerLink="/category/{{category.id}}" class="menu">{{category.name}}</a>
+  
+      <!-- Aquí comienza el bucle de las subcategorías -->
+      <div *ngIf="showSubcategories === category" class="subcategories">
+        <ul>
+            <li *ngFor="let subcategory of category.subcategories" class="menu">
+                <a routerLink="/subcategory/{{subcategory.id}}"> {{ subcategory.name }}</a>
+            </li>
+        </ul>
+    </div>
+    </li>
+  </ul>
+
+ <!-- Para el filtro por tag -->
+  <ul>
+    <li class="menuTags" (mouseenter)="showTags = true" (mouseleave)="showSubcategories = false">
+        Tags
+        <div *ngIf="showTags === true" class="tags">
+            <ul>
+                <li *ngFor="let tag of tags" class="menu">
+                    <a routerLink="/tag/{{tag.id}}"> {{ tag.name }}</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+  </ul>
+
+  <!-- ********************FIN FILTROS****************************************** -->
+
+  <div *ngIf="user.isAdmin">
+    <a href="/gallery/categories">Editar categorías</a>
+  </div>
+  <!-- Botón para abrir el formulario de nuevo maquillaje (solo admin) -->
+  <button *ngIf="user.isAdmin" (click)="setNewMakeupForm()">Agregar Maquillaje</button>
+  <!-- Formulario para agregar un nuevo producto -->
+  <div *ngIf="showNewMakeupForm">
+    <form (submit)="submitMakeup()" id="newMakeupForm">
+        <text-inputs
+            [control]="fc.name"
+            [showErrorsWhen]="isSubmitted"
+            label="Nombre">
+        </text-inputs>
+
+        <text-inputs
+            [control]="fc.description"
+            [showErrorsWhen]="isSubmitted"
+            label="Descripción">
+        </text-inputs>
+
+        <text-inputs
+            [control]="fc.price"
+            [showErrorsWhen]="isSubmitted"
+            type="number"
+            label="Precio">
+        </text-inputs>
+      <!-- Otros campos del formulario -->
+    </form>
+
+    <input type="file" accept="image/*"  #fileInput (change)="imageFileChange($event)">
+    <!-- <input type="file" accept="image/*" #fileInput [(ngModel)]="imageFile" (ngModelChange)="imageFileChange($event)"> -->
+
+    <label for="categoryAA">Selecciona la categoría:</label>
+    <select #modelInput id="categoryAA" [(ngModel)]="modelnewMakeupCategory" (ngModelChange)="setNewMakeupCategory($event)">    
+        <option *ngFor="let category of makeupCats" [ngValue]="category">
+            {{ category.name }}
+        </option>
+    </select>
+    
+    <!-- <label>Selecciona Subcategorías:</label> -->
+    <label for="subcategory">Selecciona la subcategoría:</label>
+    <select #modelInput id="subcategory" [(ngModel)]="modelnewSubCategory" (ngModelChange)="setNewSubCategory($event)">
+        <option *ngFor="let subcategory of modelnewMakeupCategory.subcategories" [ngValue]="subcategory">
+            {{ subcategory.name }}
+        </option>
+    </select>
+
+    <button type="submit" (click)="submitMakeup()">Agregar Maquillaje</button>
+  </div> 
+  <!-- Fin formulario para agregar maquillaje -->
+
+
+
+<!-- Sección de catálogo -->
+<ul>
+    <li *ngFor="let makeup of makeupServices">
+        <div class="makeupField">
+            <a routerLink="/makeup/{{makeup.id}}" class="makeupField">
+                <img [src]="makeup.imageURL" [alt]="makeup.name">
+            </a>
+        </div>
+        <div class="name">
+            {{makeup.name}}
+        </div>
+    </li>
+</ul>

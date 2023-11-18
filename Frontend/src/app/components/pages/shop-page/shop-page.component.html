@@ -1,0 +1,81 @@
+<!-- Filtro por categorias y subcategorias -->
+<ul>
+    <li *ngFor="let category of productCats" class="menu" (mouseenter)="showSubcategories = category" (mouseleave)="showSubcategories = null">
+        <a routerLink="/shop/category/{{category.id}}" class="menu">{{category.name}}</a>
+  
+      <!-- Aquí comienza el bucle de las subcategorías -->
+      <div *ngIf="showSubcategories === category" class="subcategories">
+        <ul>
+            <li *ngFor="let subcategory of category.subcategories" class="menu">
+                <a routerLink="/shop/subcategory/{{subcategory.id}}"> {{ subcategory.name }}</a>
+            </li>
+        </ul>
+    </div>
+    </li>
+  </ul>
+<!-- ******************** FIN FILTRO ****************** -->
+
+  <!-- Botón para abrir el formulario de nuevo maquillaje (solo admin) -->
+  <button *ngIf="user.isAdmin" (click)="setNewProductForm()">Agregar Producto</button>
+
+  <!-- Formulario para agregar un nuevo producto -->
+  <div *ngIf="showNewProductForm">
+    <form (submit)="submitProduct()" id="newMakeupForm">
+        <text-inputs
+            [control]="fc.name"
+            [showErrorsWhen]="isSubmitted"
+            label="Nombre">
+        </text-inputs>
+
+        <text-inputs
+            [control]="fc.description"
+            [showErrorsWhen]="isSubmitted"
+            label="Descripción">
+        </text-inputs>
+
+        <text-inputs
+            [control]="fc.price"
+            [showErrorsWhen]="isSubmitted"
+            type="number"
+            label="Precio">
+        </text-inputs>
+      <!-- Otros campos del formulario -->
+    </form>
+
+    <input type="file" accept="image/*"  #fileInput (change)="imageFileChange($event)">
+    <!-- <input type="file" accept="image/*" #fileInput [(ngModel)]="imageFile" (ngModelChange)="imageFileChange($event)"> -->
+
+    <label for="categoryAA">Selecciona la categoría:</label>
+    <select #modelInput id="categoryAA" [(ngModel)]="modelnewProductCategory" (ngModelChange)="setNewProductCategory($event)">    
+        <option *ngFor="let category of productCats" [ngValue]="category">
+            {{ category.name }}
+        </option>
+    </select>
+    
+    <!-- <label>Selecciona Subcategorías:</label> -->
+    <label for="subcategory">Selecciona la subcategoría:</label>
+    <select #modelInput id="subcategory" [(ngModel)]="modelnewProductSubCategory" (ngModelChange)="setNewSubCategory($event)">
+        <option *ngFor="let subcategory of modelnewProductCategory.subcategories" [ngValue]="subcategory">
+            {{ subcategory.name }}
+        </option>
+    </select>
+
+    <button type="submit" (click)="submitProduct()">Agregar Producto</button>
+  </div> 
+  <!-- Fin formulario para agregar producto -->
+
+<!-- Inicio catálogo de productos -->
+<ul>
+    <li *ngFor="let product of products">
+        <a routerLink="/product/{{product.id}}">
+            <img [src]="product.imageURL" [alt]="product.name">
+        </a>
+        <div class="name">
+            {{product.name}}
+        </div>
+        <div class="price">
+            ₡{{product.price}}
+        </div>
+    </li>
+</ul>
+<app-footer></app-footer>

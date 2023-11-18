@@ -1,0 +1,22 @@
+.container{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+a:hover {
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100rem;
+    border: 2px solid cornflowerblue;;
+}
+
+a img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100rem;
+    object-fit: cover;
+}

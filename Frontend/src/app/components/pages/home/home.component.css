@@ -1,0 +1,59 @@
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+}
+
+li .makeupField{
+    height: 22.5rem;
+    width: 20rem;
+    border: 1px solid whitesmoke;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: cornflowerblue;
+}
+
+li .makeupField:hover{
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+/* Estilo para el menú de categorías */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #ddd;
+    margin: 5px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s;
+  }
+  
+  .menu:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Estilo para el contenedor de subcategorías */
+  .subcategories {
+    position: absolute;
+    left: 0; /* Alinea las subcategorías con el menú principal */
+    top: 100%; /* Coloca las subcategorías debajo del menú principal */
+    width: 100%; /* Ocupa todo el ancho del menú principal */
+    display: none; /* Inicialmente oculto */
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilo para mostrar el contenedor de subcategorías al pasar el cursor sobre el menú principal */
+  .menu:hover .subcategories {
+    display: block;
+  }

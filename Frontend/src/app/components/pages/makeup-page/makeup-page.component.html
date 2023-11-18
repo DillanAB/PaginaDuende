@@ -1,0 +1,43 @@
+<div *ngIf="makeup" class="container">
+    <img [src]="makeup.imageURL" [alt]="makeup.name"/>
+    <div class="details">
+      <div class="header">
+        <span class="name">
+          {{makeup.name}}
+        </span>
+      </div>
+
+      <div class="description">
+        <span class="description">
+          {{makeup.description}}
+        </span>
+      </div>
+
+      <div class="category">
+        <span>
+          {{makeup.category.name}}
+        </span>
+      </div>
+
+      <div class="subcategories">
+        <span *ngFor="let subcategory of makeup.subCategories">
+          {{subcategory.name}}
+        </span>
+      </div>
+
+      <div class="tags">
+        <span *ngFor="let tag of makeup.tags">
+          {{tag.name}}
+        </span>
+      </div>
+  
+      <div class="price">
+        <span>
+          {{makeup.price}}
+        </span>
+      </div>
+  
+      <!-- <button (click)="addToCart()">Add To Cart</button> -->
+  
+    </div>
+  </div>

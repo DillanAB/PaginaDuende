@@ -1,0 +1,42 @@
+<app-title title="Carrito" margin="1.5rem 0 0 2.5rem"></app-title>
+
+<div class="container">
+    <ul>
+        <li *ngFor="let cartItem of getProducts(); let idx=index">
+            <div>
+                <img [src]="cartItem.product.imageURL" [alt]="cartItem.product.name">
+            </div>
+            <div>
+                <a routerLink="/product/{{cartItem.product.id}}">
+                    {{cartItem.product.name}}
+                </a>
+            </div>
+            <div>
+                <input 
+                    #quantitySelect
+                    type="number" 
+                    min="1" 
+                    [max]="cartItem.product.availability" 
+                    [value]="cartItem.quantity"
+                    (change)="changeQuantity(cartItem, quantitySelect.value)"
+                    >
+            </div>
+            <div>
+                {{cartItem.price | currency}}
+            </div>
+            <div>
+                <button class="remove-button" (click)="removeFromCart(cartItem)">
+                    Eliminar
+                </button>
+            </div>
+        </li>
+    </ul>
+    <div class="checkout">
+        <div>
+            <div class="products-count">{{cart.getProductsNum()}}</div>
+            <div class="total-price">{{cart.getTotalPrice() | currency}}</div>
+        </div>
+        <a routerLink="/pay-page">Finalizar compra</a>
+    </div>
+</div>
+
