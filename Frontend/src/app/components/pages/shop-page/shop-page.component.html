@@ -67,14 +67,16 @@
 <!-- Inicio catálogo de productos -->
 <ul>
     <li *ngFor="let product of products">
-        <a routerLink="/product/{{product.id}}">
-            <img [src]="product.imageURL" [alt]="product.name">
-        </a>
-        <div class="name">
-            {{product.name}}
-        </div>
-        <div class="price">
-            ₡{{product.price}}
+        <div class="product">
+            <a routerLink="/product/{{product.id}}">
+                <img [src]="product.imageURL" [alt]="product.name">
+            </a>
+            <div class="name">
+                {{product.name}}
+            </div>
+            <div class="price">
+                ₡{{product.price}}
+            </div>
         </div>
     </li>
 </ul>

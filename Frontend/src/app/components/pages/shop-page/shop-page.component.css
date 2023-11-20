@@ -53,6 +53,15 @@ li .makeupField:hover{
     border: 1px solid #ddd;
   }
   
+  img{
+    block-size: 15rem;
+  }
+  
+  .product{
+    margin-right: 2rem;
+    background-color: #fffff5;
+  }
+
   /* Estilo para mostrar el contenedor de subcategorías al pasar el cursor sobre el menú principal */
   .menu:hover .subcategories {
     display: block;

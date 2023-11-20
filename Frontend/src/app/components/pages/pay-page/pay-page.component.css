@@ -13,7 +13,16 @@
 }
 
 .direccion{
-    height: 100px;
+    height: 51px;
+}
+
+div{
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+textarea{
+    align-items: center;
 }
 
 default-button{

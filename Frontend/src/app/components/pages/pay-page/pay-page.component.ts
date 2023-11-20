@@ -10,4 +10,8 @@ export class PayPageComponent {
   constructor(){
 
   }
+
+  addOrder(): void {
+
+  }
 }
