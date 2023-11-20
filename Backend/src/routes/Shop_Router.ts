@@ -151,5 +151,12 @@ router.post("/editsubcat", asyncHandler(
     res.send(subcat)
   })
 )
+//Agrega un pedido
+router.post("/buy", asyncHandler(
+  async (_req, res) => {
+    const subcat = await (new ShopView().buyConfirmation(_req))
+    res.send(subcat)
+  })
+)
 
 export default router

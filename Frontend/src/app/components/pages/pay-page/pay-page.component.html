@@ -1,21 +1,58 @@
 <div class="container">
     <div class="details">
         <p class="title">Información de Pago</p>
-        <form>
-            <div>
-                <p class="dato" style="margin:auto;">Dirección </p>
-                <textarea class="direccion"></textarea>
+        <div class="datosPago">
+            <div class="info">
+                <h3>Dirección</h3>
+
+                <p class="dato">Provincia: </p>
+                <input
+                    [(ngModel)]="provincia"
+                    class="inDirection"
+                    type="text"
+                    autocomplete="on"><br />
+
+                <p class="dato">Cantón:    </p>
+                <input
+                    [(ngModel)]="canton"
+                    class="inDirection"
+                    type="text"
+                    autocomplete="on"><br />
+
+                <p class="dato">Distrito: </p>
+                <input
+                    [(ngModel)]="distrito"
+                    class="inDirection"
+                    type="text"
+                    autocomplete="on"><br />
+
+                <p class="dato" style="margin:auto;">Detalles: </p>
+                <textarea
+                    [(ngModel)]="detalles"
+                    class="detalle"
+                    autocomplete="on">
+                </textarea>
             </div>
             <div>
                 <p class="dato">Teléfono </p>
-                <input type="text">
+                <input
+                    [(ngModel)]="telefono"
+                    class="inDirection"
+                    type="text"
+                    autocomplete="on">
             </div>
             <div class="file">
                 <label>Adjunte el comprobante del pago por Sinpe Móvil</label>
-                <input type="file" style="width: 11rem;">
+                <input
+                    [(ngModel)]="image"
+                    id="image"
+                    type="file"
+                    style="width: 11rem;"
+                    accept=".jpg, .JPG, .jpeg, .JPEG, .png, .PNG">
             </div>
-            <default-button text="Completar Compra"></default-button>
-        </form>
+            <!-- <img id="comprobante" [src]="image"> -->
+            <button (click)="addOrder()">Completar Compra</button>
+        </div>
     </div>
     
 </div>

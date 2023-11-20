@@ -2,7 +2,7 @@ import { ProductCategory } from "./ProductCategory"
 import { ProductSubcategory } from "./ProductSubCategory"
 
 export class Product {
-    id: string
+    id: number
     name: string
     price: number
     imageURL: string
@@ -12,7 +12,7 @@ export class Product {
     subCategories: ProductSubcategory[]
 
 
-    constructor(pId: string, pName: string, pPrice: number, pImageUrl: string, pAvailability: number,
+    constructor(pId: number, pName: string, pPrice: number, pImageUrl: string, pAvailability: number,
             pDescription: string, pCategory: ProductCategory, pSubCategories: ProductSubcategory[]){
         this.id = pId
         this.name = pName

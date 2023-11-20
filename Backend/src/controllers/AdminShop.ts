@@ -129,4 +129,29 @@ export class AdminShop {
         }
         SingletonDAO.getInstance().dbDisconnect()
     }
+
+    public async buyCart(jsonData:any){
+        SingletonDAO.getInstance().setAccessDAO(new Mongo_ProductCategory())
+        SingletonDAO.getInstance().dbConnect()
+        const {catId, id, newName} = jsonData
+        const category = await Mongo_ProductCategory_Model.findById(catId)
+
+        if(category){
+            const subcat = await Mongo_ProductSubCategory_Model.findById(id)
+            if(subcat){
+                subcat.name = newName
+                await subcat.save()
+                let subCategories = await category.subcategories
+                const index = subCategories.findIndex(subcat => subcat.id === id)
+                subCategories[index] = subcat
+                await category.save()
+                console.log("Subategoría editada")
+            }else{
+                console.log("No existe la subcategoría")
+            }
+        }else{
+            console.log("No existe la categoría")
+        }
+        SingletonDAO.getInstance().dbDisconnect()
+    }
 }

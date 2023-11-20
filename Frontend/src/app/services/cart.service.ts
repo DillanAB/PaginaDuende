@@ -13,7 +13,9 @@ export class CartService {
   private shoppingCart: ShoppingCart = this.getCartFromLocalStorage();
   private cartSubject: BehaviorSubject<ShoppingCart> = new BehaviorSubject(this.shoppingCart);
   
-  constructor() { }
+  constructor() { 
+    //this.clearCart();
+  }
 
   createOrderDetail(product: Product, num: number){
 
@@ -34,7 +36,7 @@ export class CartService {
     this.setCartToLocalStorage();
   }
 
-  editDetailNum(detailID:string, num: number) {
+  editDetailNum(detailID:number, num: number) {
     let cartDetailSelected = this.shoppingCart.products.find(cartDet => cartDet.id === detailID);
     if (!cartDetailSelected)
       return;
@@ -43,12 +45,13 @@ export class CartService {
     this.setCartToLocalStorage();
   }
 
-  deleteCartDetail(detailID:string) {
+  deleteCartDetail(detailID:number) {
     this.shoppingCart.products = this.shoppingCart.products.filter(cartDetail => cartDetail.id != detailID)
     this.setCartToLocalStorage();
   }
 
   clearCart(){
+    this.shoppingCart.reset();
     localStorage.clear();
   }
 

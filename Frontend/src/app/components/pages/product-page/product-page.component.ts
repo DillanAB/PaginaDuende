@@ -27,8 +27,9 @@ export class ProductPageComponent {
     })
   }
 
-  addToCart(quantity: number){
-    this.cartService.addToCart(new CartDetail(this.product, quantity));
-    this.router.navigateByUrl('/cart-page');
+  addToCart(){
+    alert(this.quantity)
+    // this.cartService.addToCart(new CartDetail(this.product, this.quantity));
+    // this.router.navigateByUrl('/cart-page');
   }
 }

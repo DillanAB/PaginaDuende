@@ -1,6 +1,7 @@
-import { CState } from "../enum/CState";
-import { Client } from "./Client";
-import { IShipping } from "../../interfaces/IShipping";
+import { CState } from "./CState";
+
+import { Client } from "../Users/Client";
+import { IShipping } from "./IShipping";
 import { OrderDetail } from "./OrderDetail";
 
 export class Order{
@@ -12,7 +13,7 @@ export class Order{
     shipping!: IShipping;
     state!: CState;
 
-    addOrder(): void{
-        
+    addOrderDetail(orderDetail:OrderDetail): void{
+        this.orderDetail.push(orderDetail);
     }
 }

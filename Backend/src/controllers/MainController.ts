@@ -95,7 +95,9 @@ export class MainController {
         return (this.adminShop.editSubCategory(jsonData))
     }
 
-
+    public buyCart(jsonData:any){
+        return (this.adminShop.buyCart(jsonData))
+    }
 
     //****************Users*******************
 

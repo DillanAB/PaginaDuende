@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-top: 3rem;
 }
 
 .title {
@@ -12,8 +11,10 @@
     font-size: 30px;
 }
 
-.direccion{
+.detalle{
     height: 51px;
+    float: inline-end;
+    vertical-align: middle;
 }
 
 div{
@@ -25,12 +26,9 @@ textarea{
     align-items: center;
 }
 
-default-button{
+.dato {
     text-align: center;
-}
-
-p {
-    text-align: center;
+    display: inline;
 }
 
 input{
@@ -47,8 +45,20 @@ input{
     text-align: center;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.inDirection{
+    float: inline-end;
+}
+
+.datosPago{
+    width: 16rem;
+}
+
+.info{
+    margin-bottom: 3rem;
+}
+
+button{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
 }
