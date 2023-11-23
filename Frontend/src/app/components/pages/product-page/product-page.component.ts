@@ -28,8 +28,8 @@ export class ProductPageComponent {
   }
 
   addToCart(){
-    alert(this.quantity)
-    // this.cartService.addToCart(new CartDetail(this.product, this.quantity));
-    // this.router.navigateByUrl('/cart-page');
+    //alert(this.quantity)
+    this.cartService.addToCart(new CartDetail(this.product, this.quantity));
+    this.router.navigateByUrl('/cart-page');
   }
 }

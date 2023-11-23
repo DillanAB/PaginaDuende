@@ -130,6 +130,10 @@ export class AdminShop {
         SingletonDAO.getInstance().dbDisconnect()
     }
 
+    public async addToCart(jsonData:any){
+        
+    }
+
     public async buyCart(jsonData:any){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_ProductCategory())
         SingletonDAO.getInstance().dbConnect()

@@ -1,5 +1,5 @@
 import { CartDetail } from "./CartDetail";
-import { Client } from "./Client";
+import { Client } from "../Users/Client";
 
 export class ShoppingCart{
     id!: number;
