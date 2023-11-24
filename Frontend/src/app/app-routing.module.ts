@@ -9,6 +9,7 @@ import { MakeupPageComponent } from './components/pages/makeup-page/makeup-page.
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 import { PayPageComponent } from './components/pages/pay-page/pay-page.component';
+import { AgendaComponent } from './components/pages/agenda/agenda.component';
 
 const routes: Routes = [
   //{path:'', component:HomeComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'shop/subcategory/:subcategoryId', component:ShopPageComponent},
   {path:'product/:id', component:ProductPageComponent},
   {path:'cart-page', component:CartPageComponent},
-  {path:'pay-page', component:PayPageComponent}
+  {path:'pay-page', component:PayPageComponent},
+  {path:'agenda', component:AgendaComponent}
 ];
 
 @NgModule({

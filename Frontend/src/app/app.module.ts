@@ -23,6 +23,15 @@ import { CatPopUpComponent } from './components/partials/cat-pop-up/cat-pop-up.c
 import { TitleComponent } from './components/partials/title/title.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import { PayPageComponent } from './components/pages/pay-page/pay-page.component';
+import { AgendaComponent } from './components/pages/agenda/agenda.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+// FullCalendarModule([
+//   interactionPlugin,
+//   dayGridPlugin
+// ])
 
 @NgModule({
   declarations: [
@@ -44,10 +53,12 @@ import { PayPageComponent } from './components/pages/pay-page/pay-page.component
     CartPageComponent,
     TitleComponent,
     FooterComponent,
-    PayPageComponent
+    PayPageComponent,
+    AgendaComponent
   ],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,

@@ -12,6 +12,17 @@
                 <!-- <li *ngIf="!user.name">
                     <a routerLink="/">Login</a>
                 </li> -->
+                
+                <li *ngIf="(user.isAdmin!= undefined && !user.isAdmin)">
+                    <a routerLink="/cart-page">
+                        Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span>
+                    </a>
+                </li>
+                <li *ngIf="(user.isAdmin!= undefined && user.isAdmin)">
+                    <a routerLink="/agenda">
+                        Agenda
+                    </a>
+                </li>
                 <li *ngIf="user.name" class="menu-container">
                     <a routerLink="/dashboard">{{user.name}}</a>
                     <div class="menu">
@@ -19,11 +30,6 @@
                         <!-- <a routerLink="/orders">Orders</a> -->
                         <a (click)="logout()">Logout</a>
                     </div>
-                </li>
-                <li *ngIf="(user.isAdmin!= undefined && !user.isAdmin)">
-                    <a routerLink="/cart-page">
-                        Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span>
-                    </a>
                 </li>
             </ul>
         </nav>

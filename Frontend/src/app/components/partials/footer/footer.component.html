@@ -1,7 +1,7 @@
 <footer>
     <div class="container">
         
-        <a routerLink="/cart-page">
+        <a *ngIf="(user.isAdmin!= undefined && !user.isAdmin)" routerLink="/cart-page">
             <img src="../../../../assets/CartImages/cart.png" alt="Carrito">
         </a>
     </div>
