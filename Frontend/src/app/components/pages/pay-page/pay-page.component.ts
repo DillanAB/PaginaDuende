@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Order } from 'src/shared/models/Order';
 import { ShopService } from 'src/app/services/shop.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-pay-page',
@@ -20,13 +21,13 @@ export class PayPageComponent {
   telefono!: number;
   image!: File;
 
-  constructor(private shopService:ShopService,
+  constructor(private cartService:CartService,
     private activatedRoute:ActivatedRoute,
     private router:Router) {
     }
 
 
   addOrder(){
-    this.shopService
+    this.cartService.buyCart();
   }
 } 

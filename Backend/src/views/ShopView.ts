@@ -57,7 +57,7 @@ export class ShopView extends View {
     }
 
     public buyConfirmation(req: any) {
-        const jsonData = req.body
+        const jsonData = JSON.parse(req.body.data)
         return (new MainController().buyCart(jsonData))
     }
 }

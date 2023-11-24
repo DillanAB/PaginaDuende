@@ -136,6 +136,24 @@ router.get("/category",asyncHandler(
   })
 )
 
+//************************Página de compras **************/
+// //Agregar al carrito
+// router.post("/addcart", asyncHandler(
+//   async (_req, res) => {
+//     const subcat = await (new ShopView().buyConfirmation(_req))
+//     res.send(subcat)
+//   })
+// )
+
+//Agrega un pedido
+router.post("/buy", asyncHandler(
+  async (_req, res) => {
+    console.log("entra", res)
+    // const order = await (new ShopView().buyConfirmation(_req))
+    // res.send(order)
+  })
+)
+
 //************************Página de categorías **************/
 //Edita una categoría
 router.post("/editcat", asyncHandler(
@@ -148,13 +166,6 @@ router.post("/editcat", asyncHandler(
 router.post("/editsubcat", asyncHandler(
   async (_req, res) => {
     const subcat = await (new ShopView().editSubCategory(_req))
-    res.send(subcat)
-  })
-)
-//Agrega un pedido
-router.post("/buy", asyncHandler(
-  async (_req, res) => {
-    const subcat = await (new ShopView().buyConfirmation(_req))
     res.send(subcat)
   })
 )

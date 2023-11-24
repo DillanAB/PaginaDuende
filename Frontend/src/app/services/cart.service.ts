@@ -5,6 +5,7 @@ import { Client } from 'src/shared/models/Client';
 import { Order } from 'src/shared/models/Order';
 import { Product } from 'src/shared/models/Product';
 import { ShoppingCart } from 'src/shared/models/ShoppingCart';
+import { ShopService } from './shop.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CartService {
   private shoppingCart: ShoppingCart = this.getCartFromLocalStorage();
   private cartSubject: BehaviorSubject<ShoppingCart> = new BehaviorSubject(this.shoppingCart);
   
-  constructor() { 
+  constructor(private shopService: ShopService) { 
     //this.clearCart();
   }
 
@@ -88,6 +89,10 @@ export class CartService {
   private getCartFromLocalStorage():ShoppingCart{
     const cartJson = localStorage.getItem('shoppingCart') ;
     return cartJson? new ShoppingCart(cartJson): new ShoppingCart('');
+  }
+
+  buyCart(): void {
+    this.shopService.buyCart(this.shoppingCart);
   }
 
 }

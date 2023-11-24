@@ -25,8 +25,9 @@ export const SHOP_PRODUCT_BY_SUBCategory_URL = SHOP_URL + '/bysubcategory/'
 export const SHOP_PRODUCT_BY_ID_URL = SHOP_URL + '/product/'
 export const SHOP_CART = SHOP_URL + '/cart-page/'
 export const SHOP_UPLOAD = SHOP_URL + '/uploadproduct'
+export const SHOP_ADDCART = SHOP_URL + '/addcart'
 export const SHOP_PAY = SHOP_URL + '/pay-page/'
-export const SHOP_BUY = SHOP_PAY + '/buy'
+export const SHOP_BUY = SHOP_URL + '/buy'
 
 
 ////*********************API Usuarios
