@@ -284,22 +284,38 @@
   </div> -->
 
 <div class="container">
-  <div class="calendar-container">
-    <full-calendar [options]="calendarOptions" class="calendar"></full-calendar>
-  </div>
-
-  <div id='external-events' class="external-events">
-    <p>
-      <strong>Draggable Events</strong>
-    </p>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-        <div class='fc-event-main'>Servicio de Maquillaje</div>
+    <div class="calendar-container">
+        <full-calendar #calendar [options]="calendarOptions" class="calendar" id="calendar"></full-calendar>
     </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-        <div class='fc-event-main'>Curso de Maquillaje</div>
+    <div class="controls">
+        <div class="actions">
+            <button id="button" disabled="true" name="buttonAgregar" class="action maquillaje"><b>Agregar Servicio</b></button>
+            <button id="button" disabled="true" name="buttonAgregar" class="action curso"><b>Agregar Curso</b></button>
+            <button id="button" disabled="true" name="buttonAgregar" class="action entrega"><b>Agregar Entrega</b></button>
+        </div>
+        <div class="configurations">
+            <p>Título</p>
+            <input id="title" type="text" disabled="true">
+            <p>Fecha</p>
+            <input id="dayEvent" type="date" disabled="true">
+            <p>Hora de inicio</p>
+            <input id="startTime" type="time" disabled="true">
+            <p>Hora fin</p>
+            <input id="endTime" type="time" disabled="true">
+        </div>
+        <!-- <div id='external-events' class="external-events">
+            <p>
+                <strong>Draggable Events</strong>
+            </p>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                <div class='fc-event-main'>Servicio de Maquillaje</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                <div class='fc-event-main'>Curso de Maquillaje</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                <div class='fc-event-main'>Entrega de Pedido</div>
+            </div>
+        </div> -->
     </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-        <div class='fc-event-main'>Entrega de Pedido</div>
-    </div>
-  </div>
 </div>

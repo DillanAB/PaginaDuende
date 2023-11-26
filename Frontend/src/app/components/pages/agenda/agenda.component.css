@@ -18,16 +18,9 @@ body {font-family: Verdana, sans-serif;} */
     width: 50%;
 }
 
-.controls{
-    width: 50%;
-}
 
-.actions{
-    height: 10rem;
-    display: grid;
-    align-items: center;
-    margin-top: 2rem;
-}
+
+
 
 .eventsRegistered{
     display: grid;
@@ -37,11 +30,7 @@ body {font-family: Verdana, sans-serif;} */
     background-color: #ddd;
 }
 
-.action{
-    margin-top: 5rem;
-    display: block;
-    margin: 0 auto;
-} */
+ */
 
 /* Month header */
 /* .month {
@@ -124,7 +113,6 @@ body {font-family: Verdana, sans-serif;} */
 }
   
 .external-events {
-    margin-left: 1rem;
     display: block;
     z-index: 2;
     top: 20px;
@@ -133,6 +121,7 @@ body {font-family: Verdana, sans-serif;} */
     padding: 0 10px;
     border: 1px solid #ccc;
     background: #eee;
+    margin: auto;
 }
   
 .fc-event {
@@ -142,6 +131,58 @@ body {font-family: Verdana, sans-serif;} */
 }
   
 .calendar {
-    /* max-width: 500px; */
     width: 43rem;
+}
+
+.actions{
+    height: 10rem;
+    width: 10rem;
+    display: grid;
+    align-items: center;
+    /* background-color: red; */
+    margin: auto;
+}
+
+.controls{
+    margin: 2rem 2rem 2rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    width: 50%;
+    height: 32rem;
+    /* background-color: aqua; */
+}
+
+.action{
+    border-radius: 2rem;
+    color: white;
+}
+
+.action:hover{
+    cursor: pointer;
+    opacity: 70%;
+}
+
+.maquillaje{
+    background-color: cornflowerblue;
+}
+
+.curso{
+    background-color: green;
+}
+
+.entrega{
+    background-color: red;
+}
+
+.action:disabled{
+    background-color: darkgrey;
+    color: black;
+}
+
+.configurations{
+    margin: auto;
+}
+
+p{
+    margin-bottom: 0;
 }
