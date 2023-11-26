@@ -186,3 +186,11 @@ body {font-family: Verdana, sans-serif;} */
 p{
     margin-bottom: 0;
 }
+
+a{
+    border: 5px solid blue;
+}
+
+a:hover{
+    cursor: pointer;
+}

@@ -11,12 +11,8 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
   styleUrls: ['./agenda.component.css']
 })
 export class AgendaComponent {
-  
-  id:number = 1;
   @ViewChild('calendar') calendarComponent: FullCalendarComponent | undefined;
   calendar!:Calendar;
-  daySelected!:string;
-  selectOption:boolean = false;
   start!:string;
   end!:string;
 
@@ -31,7 +27,7 @@ export class AgendaComponent {
       color: 'red'
     },
     {
-      id: '2',
+      id: 'Curso',
       title: 'Evnto malo',
       start: '2023-11-12T11:00:00',
       end: '2023-11-12T12:00:00',
@@ -39,26 +35,7 @@ export class AgendaComponent {
     }
   ];
 
-  // onDateClick(res:{dateStr:string}) {
-  //   const buttonAdd = document.getElementsByName('buttonAgregar');
-  //   buttonAdd.forEach(function(button){
-  //     (button as HTMLButtonElement).disabled = false;
-  //   })
-  //   this.daySelected = res.dateStr;
-  // }
-
-  onDateClick(res:{dateStr:string}) {
-    this.calendarOptions.events = this.Events;
-  }
-
   onSelect(res:{startStr:string, endStr:string}) {
-    if (!this.selectOption){
-      const buttonAdd = (document.getElementsByName('buttonAgregar'));
-      buttonAdd.forEach(function(button){
-        (button as HTMLButtonElement).disabled = false;
-      })
-    }
-    
     this.start = res.startStr.replace('-06:00',"");
     this.end = res.endStr.replace('-06:00',"");
 
@@ -73,35 +50,94 @@ export class AgendaComponent {
     (document.getElementById('endTime') as HTMLInputElement).value = endTime;
   }
 
-  actionClick(){
+  evaluate(){
+    const startTime = (document.getElementById('startTime') as HTMLInputElement).value
+    const endTime = (document.getElementById('endTime') as HTMLInputElement).value
+    const dayEvent = (document.getElementById('dayEvent') as HTMLInputElement).value
+    const title = (document.getElementById('title') as HTMLInputElement).value
+    
+    if (startTime != '')
+      if (endTime != '')
+        if (dayEvent != '')
+          if (title != ''){
+            this.start = dayEvent + 'T' + startTime
+            this.end = dayEvent + 'T' + endTime
+            const buttonAdd = (document.getElementsByName('buttonAgregar'));
+            buttonAdd.forEach(function(button){
+              (button as HTMLButtonElement).disabled = false;
+            })
+          }
+  }
+
+  chooseColor(type: string): string {
+    var colorEvent:string = '';
+    switch(type){
+      case 'Maquillaje': {
+        colorEvent = 'cornflowerblue';
+        break;
+      }
+      case 'Curso': {
+        colorEvent = 'green';
+        break;
+      }
+      case 'Entrega': {
+        colorEvent = 'red';
+        break;
+      }
+    }
+    return colorEvent;
+  }
+
+  actionClick(type:string){
     var titleEvent = (document.getElementById('title') as HTMLInputElement).value
     const event = {
-      id: this.id.toString(),
+      id: type,
       title: titleEvent,
       start: this.start,
       end: this.end,
-      color: 'cornflowerblue'
+      color: this.chooseColor(type)
+      
     }
+
+    for (let i = 0; i < this.Events.length; i++) {
+      const eventRegistered = this.Events[i]
+      if ((event.start < eventRegistered.end && event.start > eventRegistered.start)
+       || (event.end < eventRegistered.end && event.end > eventRegistered.start)
+       || (event.start == eventRegistered.start && event.end >= eventRegistered.end))
+        if(eventRegistered.id == 'Maquillaje' || event.id == 'Maquillaje'){
+          alert("ERROR: El evento que se está tratando de registrar colisiona con un servicio de maquillaje, lo cual no es posible");
+          return
+        }
+        else{
+          const confirmed = confirm("El evento que se está tratando de registrar colisiona con otro. Desea agregarlo de todas maneras");
+          if(!confirmed)
+            return
+        }
+    }
+
     this.Events.push(event);
 
     if (this.calendarComponent){
       let calendarApi = this.calendarComponent.getApi();
       calendarApi.addEvent(event);
+      
     }
+    
   }
 
   onUnSelect() {
-    if (!this.selectOption){
-      const buttonAdd = (document.getElementsByName('buttonAgregar'));
-      buttonAdd.forEach(function(button){
-        (button as HTMLButtonElement).disabled = true;
-      })
+    if (this.calendarComponent){
+      let calendarApi = this.calendarComponent.getApi();
+      const x = calendarApi.getEventById('1');
     }
   }
 
+  onEventClick(){//res{event: any}){
+
+  }
+
   ngOnInit(){
-    // if (this.calendarComponent)
-    //   this.calendar = this.calendarComponent.getApi();
+
   }
 
   calendarOptions: CalendarOptions = {
@@ -112,12 +148,16 @@ export class AgendaComponent {
     },
     //initialView: 'timeGridWeek',
     initialView: 'dayGridMonth',
-    editable: true,
+    //editable: true,
     selectable: true,
     navLinks:true,
-    dateClick: this.onDateClick.bind(this),
     select: this.onSelect.bind(this),
     unselect: this.onUnSelect.bind(this),
+    eventClick: function(info){
+      alert('Event: ' + info.event.title);
+      //info.event.title = 'r';
+    }, 
+    //this.onEventClick.bind(this),
     events: this.Events,
     plugins: [timeGridPlugin, dayGridPlugin, interactionPlugin]
   };
