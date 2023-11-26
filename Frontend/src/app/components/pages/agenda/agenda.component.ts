@@ -153,7 +153,7 @@ export class AgendaComponent {
     navLinks:true,
     select: this.onSelect.bind(this),
     unselect: this.onUnSelect.bind(this),
-    eventClick: function(info){
+    eventClick: function(info:any){
       alert('Event: ' + info.event.title);
       //info.event.title = 'r';
     }, 

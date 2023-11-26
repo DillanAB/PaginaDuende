@@ -2,7 +2,7 @@ import { ProductCategory } from "./ProductCategory"
 import { ProductSubcategory } from "./ProductSubCategory"
 
 export class Product {
-    id!: number
+    id!: string
     name: string
     price: number
     imageURL: string
