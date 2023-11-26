@@ -1,5 +1,5 @@
 import { config } from "../config"
-import { DAO_Product_Model, Mongo_Product } from "../models/Database/Mongo_Product"
+import { Mongo_Product_Model, Mongo_Product } from "../models/Database/Mongo_Product"
 import { Mongo_ProductCategory, Mongo_ProductCategory_Model } from "../models/Database/Mongo_ProductCategory"
 import { Mongo_ProductSubCategory_Model } from "../models/Database/Mongo_ProductSubCategory"
 import { SingletonDAO } from "../models/Database/SingletonDAO"
@@ -14,7 +14,7 @@ export class AdminShop {
     public async getProducts(){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_Product())
         SingletonDAO.getInstance().dbConnect()
-        const products = await DAO_Product_Model.find()
+        const products = await Mongo_Product_Model.find()
         SingletonDAO.getInstance().dbDisconnect()
         return products
     }
@@ -22,7 +22,7 @@ export class AdminShop {
     public async getProductById(id:string){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_Product())
         SingletonDAO.getInstance().dbConnect()
-        const product = await DAO_Product_Model.findById(id)
+        const product = await Mongo_Product_Model.findById(id)
 
         if(product?.category){
             product.category = await Mongo_ProductCategory_Model.findById(product.category) as ProductCategory
@@ -35,7 +35,7 @@ export class AdminShop {
     public async getProductsByCategory(categoryId:string){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_Product())
         SingletonDAO.getInstance().dbConnect()
-        const products = await DAO_Product_Model.find({ category: categoryId })
+        const products = await Mongo_Product_Model.find({ category: categoryId })
 
         SingletonDAO.getInstance().dbDisconnect()
         return products
@@ -44,7 +44,7 @@ export class AdminShop {
     public async getProductsBySubCategory(subcategoryId:string){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_Product())
         SingletonDAO.getInstance().dbConnect()
-        const products = await DAO_Product_Model.find({ subCategories: subcategoryId })
+        const products = await Mongo_Product_Model.find({ subCategories: subcategoryId })
         SingletonDAO.getInstance().dbDisconnect()
         return products
     }
@@ -55,7 +55,7 @@ export class AdminShop {
 
         //Revisa si existe un producto con ese nombre
         const {name} = jsonProductService
-        const product = await DAO_Product_Model.findOne({name})
+        const product = await Mongo_Product_Model.findOne({name})
         
         if (product){
             console.log("Ya existe un maquillaje con ese nombre")
@@ -66,7 +66,7 @@ export class AdminShop {
             const newJsonProduct = Object.assign(jsonProductService, {imageURL: varImageURL})//Nuevo JSON con la URL
 
             const newProduct = new FactoryProduct().create(newJsonProduct)
-            const dbProduct = await DAO_Product_Model.create(newProduct)
+            const dbProduct = await Mongo_Product_Model.create(newProduct)
             console.log("Producto creado")
 
             //Sube la imagen a la carpeta de imágenes
