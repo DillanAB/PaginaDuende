@@ -7,7 +7,7 @@ import { CartDetail } from "../models/Shop/CartDetail"
 import { ShoppingCart } from "../models/Shop/ShoppingCart"
 import { Mongo_OrderDetail_Model } from "../models/Database/Mongo_OrderDetail"
 import { Notifier } from "./Notifier"
-import { config } from "../config"
+// import { config } from "../config"
 
 export class AdminCart{
     constructor(){}
@@ -75,16 +75,18 @@ export class AdminCart{
     public async buyCart(jsonData:any, image:any){
         SingletonDAO.getInstance().setAccessDAO(new Mongo_Order())
         SingletonDAO.getInstance().dbConnect()
-
-        const {host, port} = config.appConfig
-        const varImageURL = `${host}:${port}/public/${name}` + '.' + image.mimetype.split('/')[1]
+        
+        // const {host, port} = config.appConfig
 
         const {clientId, cartId, provincia, canton, distrito, detalles, telefono} = jsonData
+        // const varImageURL = `${host}:${port}/public/${clientId}` + '.' + image.mimetype.split('/')[1]
         const cartDetails = await Mongo_CartDetail_Model.find({cartId: cartId})
         const newOrder = await Mongo_Order_Model.create({clientId: clientId, provincia: provincia,
                                                         canton: canton, distrito: distrito, detalles: detalles,
-                                                        telefono: telefono, receiptURL: varImageURL, state: "Pendiente"})
-
+                                                        telefono: telefono, receiptURL: 'varImageURL', state: "Pendiente"})
+        // const path = `./src/storage/facts/${clientId}` + '.' + image.mimetype.split('/')[1]
+        // image.mv(path)
+        // console.log("Imagen guardada")
         for (let i = 0; i < cartDetails.length; i++) {
             //Obtiene el producto de cada detalle
             const product = await Mongo_Product_Model.findById(cartDetails[i].productId)
@@ -96,7 +98,7 @@ export class AdminCart{
             }
             await cartDetails[i].deleteOne()
         }
-        console.log('Nueva orden')
+        console.log('Nueva orden' + image)
         new Notifier().notifyNewOrder()
         return "Order created"
     }

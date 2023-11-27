@@ -64,7 +64,8 @@ export class ShopView extends View {
     //Crea la orden de compra
     public buyConfirmation(req: any) {
         const jsonData = req.body
-        const image = req.files.image as fileUpload.UploadedFile
+        // const image = req.files.image as fileUpload.UploadedFile
+        const image = '1'
         return (new MainController().buyCart(jsonData, image))
     }
 }
