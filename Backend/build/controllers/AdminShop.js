@@ -23,7 +23,7 @@ class AdminShop {
         return __awaiter(this, void 0, void 0, function* () {
             SingletonDAO_1.SingletonDAO.getInstance().setAccessDAO(new Mongo_Product_1.Mongo_Product());
             SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
-            const products = yield Mongo_Product_1.DAO_Product_Model.find();
+            const products = yield Mongo_Product_1.Mongo_Product_Model.find();
             SingletonDAO_1.SingletonDAO.getInstance().dbDisconnect();
             return products;
         });
@@ -33,7 +33,7 @@ class AdminShop {
         return __awaiter(this, void 0, void 0, function* () {
             SingletonDAO_1.SingletonDAO.getInstance().setAccessDAO(new Mongo_Product_1.Mongo_Product());
             SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
-            const product = yield Mongo_Product_1.DAO_Product_Model.findById(id);
+            const product = yield Mongo_Product_1.Mongo_Product_Model.findById(id);
             if (product === null || product === void 0 ? void 0 : product.category) {
                 product.category = (yield Mongo_ProductCategory_1.Mongo_ProductCategory_Model.findById(product.category));
                 product.subCategories = (yield Mongo_ProductSubCategory_1.Mongo_ProductSubCategory_Model.find({ _id: { $in: product === null || product === void 0 ? void 0 : product.subCategories } }));
@@ -47,7 +47,7 @@ class AdminShop {
         return __awaiter(this, void 0, void 0, function* () {
             SingletonDAO_1.SingletonDAO.getInstance().setAccessDAO(new Mongo_Product_1.Mongo_Product());
             SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
-            const products = yield Mongo_Product_1.DAO_Product_Model.find({ category: categoryId });
+            const products = yield Mongo_Product_1.Mongo_Product_Model.find({ category: categoryId });
             SingletonDAO_1.SingletonDAO.getInstance().dbDisconnect();
             return products;
         });
@@ -57,7 +57,7 @@ class AdminShop {
         return __awaiter(this, void 0, void 0, function* () {
             SingletonDAO_1.SingletonDAO.getInstance().setAccessDAO(new Mongo_Product_1.Mongo_Product());
             SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
-            const products = yield Mongo_Product_1.DAO_Product_Model.find({ subCategories: subcategoryId });
+            const products = yield Mongo_Product_1.Mongo_Product_Model.find({ subCategories: subcategoryId });
             SingletonDAO_1.SingletonDAO.getInstance().dbDisconnect();
             return products;
         });
@@ -69,7 +69,7 @@ class AdminShop {
             SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
             //Revisa si existe un producto con ese nombre
             const { name } = jsonProductService;
-            const product = yield Mongo_Product_1.DAO_Product_Model.findOne({ name });
+            const product = yield Mongo_Product_1.Mongo_Product_Model.findOne({ name });
             if (product) {
                 console.log("Ya existe un maquillaje con ese nombre");
             }
@@ -79,7 +79,7 @@ class AdminShop {
                 const varImageURL = `${host}:${port}/public/${name}` + '.' + image.mimetype.split('/')[1];
                 const newJsonProduct = Object.assign(jsonProductService, { imageURL: varImageURL }); //Nuevo JSON con la URL
                 const newProduct = new FactoryProduct_1.FactoryProduct().create(newJsonProduct);
-                const dbProduct = yield Mongo_Product_1.DAO_Product_Model.create(newProduct);
+                const dbProduct = yield Mongo_Product_1.Mongo_Product_Model.create(newProduct);
                 console.log("Producto creado");
                 //Sube la imagen a la carpeta de imágenes
                 if (dbProduct) {

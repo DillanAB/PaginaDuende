@@ -41,50 +41,9 @@ router.get("/seed", (0, express_async_handler_1.default)((_req, res) => __awaite
 
 //Muestra todos los servicios de maquillaje
 router.get("/", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Hola mundo")
     const events = yield (new CalendarView_1.CalendarView().getEvents());
     res.send(events);
 })));
 
-
-router.use((0, express_fileupload_1.default)({
-    createParentPath: true
-}));
-//Crea un nuevo servicio de maquillaje
-router.post("/uploadmakeup", (req, res) => {
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No se recibieron archivos');
-    }
-    new GalleryView_1.GalleryView().createMakeupService(req);
-});
-//Obtiene todas las categorías de la galería, ya tienen las subcategorías
-router.get("/category", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cats = yield (new GalleryView_1.GalleryView().getMakeupCategories());
-    res.send(cats);
-})));
-//Muestra todos los tags de la galería
-router.get("/tags", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const tags = yield (new GalleryView_1.GalleryView().getMakeupTags());
-    res.send(tags);
-})));
-//************************Página de categorías **************/
-//Edita una categoría
-router.post("/editcat", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cat = yield (new GalleryView_1.GalleryView().editCategory(_req));
-    res.send(cat);
-})));
-//Edita una subcategoría
-router.post("/editsubcat", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const subcat = yield (new GalleryView_1.GalleryView().editSubCategory(_req));
-    res.send(subcat);
-})));
-//Crea una categoría
-router.post("/createcat", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cat = yield (new GalleryView_1.GalleryView().createCategory(_req));
-    res.send(cat);
-})));
-//Crea una subcategoría
-router.post("/createsubcat", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const subcat = yield (new GalleryView_1.GalleryView().createSubCategory(_req));
-    res.send(subcat);
-})));
 exports.default = router;

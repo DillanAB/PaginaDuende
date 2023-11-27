@@ -27,7 +27,7 @@ const router = (0, express_1.Router)();
 router.get("/seed", (0, express_async_handler_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     SingletonDAO_1.SingletonDAO.getInstance().setAccessDAO(new Mongo_Product_1.Mongo_Product());
     SingletonDAO_1.SingletonDAO.getInstance().dbConnect();
-    const productCount = yield Mongo_Product_1.DAO_Product_Model.countDocuments();
+    const productCount = yield Mongo_Product_1.Mongo_Product_Model.countDocuments();
     if (productCount > 0) {
         res.send("Seed is already done");
     }
@@ -49,7 +49,7 @@ router.get("/seed", (0, express_async_handler_1.default)((_req, res) => __awaite
                 const nameExt = name + '.png';
                 console.log("nameExt", nameExt);
                 product.imageURL = `http://localhost:3000/public/${nameExt}`;
-                yield Mongo_Product_1.DAO_Product_Model.create(product);
+                yield Mongo_Product_1.Mongo_Product_Model.create(product);
             }
         }));
         res.send("Seed is done");
