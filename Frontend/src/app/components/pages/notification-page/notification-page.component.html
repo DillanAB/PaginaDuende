@@ -1,0 +1,22 @@
+<h1>Notificaciones</h1>
+<div class="container">
+    <ul>
+        <li *ngFor="let noti of notifications; let idx=index">
+            <div>
+                {{noti.message}}
+            </div>
+
+            <div>
+                {{noti.date}}
+            </div>
+            
+            <div>
+                <button class="remove-button" (click)="removeNoti(noti)">
+                    Eliminar
+                </button>
+            </div>
+        </li>
+    </ul>
+    <!-- <button (click)="pr()"></button> -->
+</div>
+

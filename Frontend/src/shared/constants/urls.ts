@@ -41,3 +41,7 @@ export const CALENDAR_ADD_EVENT_URL = CALENDAR_URL + '/addevent'
 ////*********************API Usuarios
 export const USER_LOGIN_URL = BASE_URL +  '/api/users/login'
 export const USER_REGISTER_URL = BASE_URL +  '/api/users/register'
+
+
+////*********************API Notificaciones
+export const NOTIFICATION_URL = BASE_URL +  '/api/notifications/'

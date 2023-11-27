@@ -27,6 +27,7 @@ import { AgendaComponent } from './components/pages/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { NotificationPageComponent } from './components/pages/notification-page/notification-page.component';
 
 // FullCalendarModule([
 //   interactionPlugin,
@@ -54,7 +55,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
     TitleComponent,
     FooterComponent,
     PayPageComponent,
-    AgendaComponent
+    AgendaComponent,
+    NotificationPageComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { CartPageComponent } from './components/pages/cart-page/cart-page.compon
 import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 import { PayPageComponent } from './components/pages/pay-page/pay-page.component';
 import { AgendaComponent } from './components/pages/agenda/agenda.component';
+import { NotificationPageComponent } from './components/pages/notification-page/notification-page.component';
 
 const routes: Routes = [
   //{path:'', component:HomeComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'product/:id', component:ProductPageComponent},
   {path:'cart-page', component:CartPageComponent},
   {path:'pay-page', component:PayPageComponent},
-  {path:'agenda', component:AgendaComponent}
+  {path:'agenda', component:AgendaComponent},
+  {path: 'notifications', component:NotificationPageComponent}
 ];
 
 @NgModule({

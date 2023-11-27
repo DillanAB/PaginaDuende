@@ -13,15 +13,17 @@
             </span>
         </div>
 
-        <div class="quantity">
-            <input 
-                [(ngModel)]="quantity"
-                type="number" 
-                min="1"
-                [max]="product.availability" 
-                >
+
+        <div *ngIf="!user.isAdmin">
+            <div class="quantity">
+                <input 
+                    [(ngModel)]="quantity"
+                    type="number" 
+                    min="1"
+                    [max]="product.availability" 
+                    >
+            </div>
+            <button (click)="addToCart()">Agregar al carrito<i></i></button>
         </div>
-        
-        <button (click)="addToCart()">Agregar al carrito<i></i></button>
      </div>
 </div>

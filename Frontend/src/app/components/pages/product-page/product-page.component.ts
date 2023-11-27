@@ -50,7 +50,6 @@ export class ProductPageComponent implements OnInit {
 
   //Agrega un producto al carrito de compras
   addToCart(){
-    alert(this.cart.id)
     const addData:IAddToCart = {
       productId: this.product.id,
       quantity: this.quantity,
@@ -60,7 +59,11 @@ export class ProductPageComponent implements OnInit {
     
     this.cartService.addToCart(addData).subscribe((cart) => {
     });
-    // alert("Producto agregado al carrito")
+    alert("Producto agregado al carrito")
     // this.router.navigateByUrl('/cart-page');
+  }
+
+  pr(){
+    alert(this.cart)
   }
 }

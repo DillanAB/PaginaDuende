@@ -5,11 +5,13 @@ import shopRouter from './routes/Shop_Router'
 import galleryRouter from './routes/Gallery_Router' 
 import userRouter from './routes/User_Router'
 import cartRouter from './routes/Cart_Router'
+import notiRouter from './routes/Noti_router'
 
 const app = express()
 app.use(express.json())
 app.use('/public', express.static(`${__dirname}/storage/MakeupServicesImages`))
 app.use('/public', express.static(`${__dirname}/storage/ProductsImages`))
+app.use('/public', express.static(`${__dirname}/storage/facts`))
 
 const PORT = 3000
 
@@ -33,3 +35,4 @@ app.use("/api/users", userRouter)
 app.use("/api/gallery", galleryRouter) 
 app.use('/api/shop', shopRouter) 
 app.use('/api/cart', cartRouter) 
+app.use('/api/notifications', notiRouter)
