@@ -30,7 +30,7 @@ export class AgendaComponent {
 
   constructor(private calendarService: CalendarService){
     let servicesObservable:Observable<CalendarEvent[]>
-    servicesObservable = calendarService.getEvents()
+    servicesObservable = this.calendarService.getEvents()
 
     //Set the events
     servicesObservable.subscribe((serverServices) => {
@@ -59,26 +59,33 @@ export class AgendaComponent {
   }
 
   createEvent(title: string, type:string){
-    const event = {
-      id: this.id,
-      title: title,
-      start: this.start,
-      end: this.end,
-      color: this.chooseColor(type),
-      type: type
-    };
+    // const event = {
+    //   id: this.id,
+    //   title: title,
+    //   start: this.start,
+    //   end: this.end,
+    //   color: this.chooseColor(type),
+    //   type: type
+    // };
+    var event;
+    if (type == "Maquillaje")
+      event = new MakeupEvent(this.id, title, this.start, this.end)
+    else if (type == "Curso")
+      event = new CourseEvent(this.id, title, this.start, this.end)
+    else
+      event = new DeliveryEvent(this.id, title, this.start, this.end)
     this.id++;
     return event;
   }
 
-  colisionesPosibles(eventRegistered:any){
-    return ((this.start < eventRegistered.end && this.start > eventRegistered.start)
-         || (this.end < eventRegistered.end && this.end > eventRegistered.start)
-         || (this.start == eventRegistered.start && this.end >= eventRegistered.end))
+  colisionesPosibles(eventRegistered:CalendarEvent){
+    return ((this.start < eventRegistered.getEnd() && this.start > eventRegistered.getStart())
+         || (this.end < eventRegistered.getEnd() && this.end > eventRegistered.getStart())
+         || (this.start == eventRegistered.getStart() && this.end >= eventRegistered.getEnd()))
   }
 
   /* Control events */
-  addEvent(event:any){
+  addEvent(event:CalendarEvent){
     if (this.calendarComponent){
       let calendarApi = this.calendarComponent.getApi();
       calendarApi.addEvent(event);
@@ -86,7 +93,7 @@ export class AgendaComponent {
     this.Events.push(event);
   }
 
-  editEvent(event:any){
+  editEvent(event:CalendarEvent){
     this.deleteEvent();
 
     if (this.calendarComponent){
@@ -110,6 +117,7 @@ export class AgendaComponent {
   }
 
   actionClick(type:string){
+    
     var titleEvent = (document.getElementById('title') as HTMLInputElement).value;
     const event = this.createEvent(titleEvent,type);
 
@@ -117,7 +125,7 @@ export class AgendaComponent {
       const eventRegistered = this.Events[i]
 
       if (this.colisionesPosibles(eventRegistered)){
-
+        
         if(eventRegistered.getType() == 'Maquillaje' || event.type == 'Maquillaje'){
           alert("ERROR: El evento que se está tratando de registrar es o colisiona con un servicio de maquillaje, lo cual no es posible  ");
           return
@@ -150,8 +158,8 @@ export class AgendaComponent {
     event?.setTitle(titleEvent);
     event?.setStart(this.start);
     event?.setEnd(this.end);
-    
-    this.editEvent(event);
+    if (event)
+      this.editEvent(event);
 
     this.resetConfigurations();
   }
@@ -192,16 +200,16 @@ export class AgendaComponent {
   }
 
   onUnSelect() {
-    var array1:number[] = [];
-    for (let i = 0; i < this.Events.length; i++) {
-      array1.push(this.Events[i].getId());
-    }
-    alert(array1);
+    // var array1:number[] = [];
+    // for (let i = 0; i < this.Events.length; i++) {
+    //   array1.push(this.Events[i].getId());
+    // }
+    // alert(array1);
   }
   
   onEventClick(info: any){
     this.infoEventId = info.event.id;
-    alert(info.event.id);
+    //alert(info.event.id);
     const startSplit = info.event.startStr.split('T');
     const dayEvent = startSplit[0];
     const startTime = startSplit[1].split('-')[0];

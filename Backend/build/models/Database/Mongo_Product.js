@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DAO_Product_Model = exports.DAO_Product_Schema = exports.Mongo_Product = void 0;
+exports.Mongo_Product_Model = exports.DAO_Product_Schema = exports.Mongo_Product = void 0;
 const mongoose_1 = require("mongoose");
 const DAO_Mongo_1 = require("./DAO_Mongo");
 const config_1 = require("../../config");
@@ -31,4 +31,4 @@ exports.DAO_Product_Schema.methods.setImageURL = function setImageURL(imageName)
     const { host, port } = config_1.config.appConfig;
     this.imageURL = `${host}:${port}/public/${imageName}`;
 };
-exports.DAO_Product_Model = (0, mongoose_1.model)('Product', exports.DAO_Product_Schema);
+exports.Mongo_Product_Model = (0, mongoose_1.model)('Product', exports.DAO_Product_Schema);

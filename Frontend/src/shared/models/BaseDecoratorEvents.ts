@@ -20,6 +20,14 @@ export class BaseDecoratorEvents implements CalendarEvent{
     public getId() : number {
         return this.id;
     }
+
+    public getStart() : string {
+        return this.start;
+    }
+
+    public getEnd() : string {
+        return this.end;
+    }
     
     public getType() : string {
         return this.type;

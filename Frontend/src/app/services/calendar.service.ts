@@ -15,15 +15,15 @@ export class CalendarService {
     return this.http.get<CalendarEvent[]>(CALENDAR_URL)
   }
 
-  addEvent(event: CalendarEvent){
-    return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, event)
-  }
+  // addEvent(event: CalendarEvent){
+  //   return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, event)
+  // }
 
-  editEvent(event: CalendarEvent){
-    return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, event)
-  }
+  // editEvent(event: CalendarEvent){
+  //   return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, event)
+  // }
 
-  deleteEvent(id: number){
-    return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, id)
-  }
+  // deleteEvent(id: number){
+  //   return this.http.post<CalendarEvent>(CALENDAR_ADD_EVENT_URL, id)
+  // }
 }

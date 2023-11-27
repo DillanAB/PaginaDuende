@@ -1,6 +1,6 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import { DAO_Product_Model, Mongo_Product } from "../models/Database/Mongo_Product";
+import { Mongo_Product_Model, Mongo_Product } from "../models/Database/Mongo_Product";
 import { SingletonDAO } from "../models/Database/SingletonDAO";
 import { sample_Products, sample_catsProduct, sample_subcatsProduct } from "../data";
 import { Mongo_ProductSubCategory, Mongo_ProductSubCategory_Model } from "../models/Database/Mongo_ProductSubCategory";
@@ -16,7 +16,7 @@ router.get("/seed", asyncHandler(
   async (_req, res) => {
     SingletonDAO.getInstance().setAccessDAO(new Mongo_Product())
     SingletonDAO.getInstance().dbConnect()
-    const productCount = await DAO_Product_Model.countDocuments();
+    const productCount = await Mongo_Product_Model.countDocuments();
     if (productCount > 0) {
       res.send("Seed is already done")
     }else{
@@ -37,7 +37,7 @@ router.get("/seed", asyncHandler(
             const nameExt = name + '.png'
             console.log("nameExt",nameExt)
             product.imageURL = `http://localhost:3000/public/${nameExt}`
-            await DAO_Product_Model.create(product)
+            await Mongo_Product_Model.create(product)
         }
       })
       res.send("Seed is done");
