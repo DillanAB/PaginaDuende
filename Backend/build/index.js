@@ -9,6 +9,7 @@ const Shop_Router_1 = __importDefault(require("./routes/Shop_Router"));
 // import dotenv from 'dotenv'
 const Gallery_Router_1 = __importDefault(require("./routes/Gallery_Router"));
 const User_Router_1 = __importDefault(require("./routes/User_Router"));
+const Calendar_Router_1 = __importDefault(require("./routes/Calendar_Router"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/public', express_1.default.static(`${__dirname}/storage/MakeupServicesImages`));
@@ -30,3 +31,4 @@ app.use((0, cors_1.default)({
 app.use("/api/users", User_Router_1.default);
 app.use("/api/gallery", Gallery_Router_1.default);
 app.use('/api/shop', Shop_Router_1.default);
+app.use('/api/calendar', Calendar_Router_1.default);

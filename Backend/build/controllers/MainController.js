@@ -4,11 +4,13 @@ exports.MainController = void 0;
 const AdminGallery_1 = require("./AdminGallery");
 const AdminShop_1 = require("./AdminShop");
 const AdminUser_1 = require("./AdminUser");
+const AdminCalendar_1 = require("./AdminCalendar");
 class MainController {
     constructor() {
         this.adminUser = new AdminUser_1.AdminUser();
         this.adminGallery = new AdminGallery_1.AdminGallery();
         this.adminShop = new AdminShop_1.AdminShop();
+        this.adminCalendar = new AdminCalendar_1.AdminCalendar();
     }
     //****************Gallery*******************
     //Obtiene todos los maquillajes de la base de datos
@@ -99,6 +101,11 @@ class MainController {
     }
     register(jsonUser) {
         return (this.adminUser.register(jsonUser));
+    }
+
+    //****************Calendar*******************
+    getEvents() {
+        return (this.adminCalendar.getEvents());
     }
 }
 exports.MainController = MainController;

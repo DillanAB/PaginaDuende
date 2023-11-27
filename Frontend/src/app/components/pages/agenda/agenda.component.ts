@@ -4,6 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { CalendarService } from 'src/app/services/calendar.service';
+import { CalendarEvent } from 'src/shared/models/CalendarEvent';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { MakeupEvent } from 'src/shared/models/MakeupEvent';
+import { DeliveryEvent } from 'src/shared/models/DeliveryEvent';
+import { CourseEvent } from 'src/shared/models/CourseEvent';
 
 @Component({
   selector: 'app-agenda',
@@ -15,29 +22,21 @@ export class AgendaComponent {
   start!:string;
   end!:string;
   infoEventId!:string;
-
-  constructor(){}
-  
-  Events:any[] = [//];
-    {
-      id: 1,
-      title: 'BCH237',
-      start: '2023-11-13T10:30:00',
-      end: '2023-11-13T11:30:00',
-      color: 'red',
-      type: 'Entrega'
-    },
-    {
-      id: 2,
-      title: 'Evnto malo',
-      start: '2023-11-12T11:00:00',
-      end: '2023-11-12T12:00:00',
-      color: 'green',
-      type: 'Curso'
-    }
+  Events:CalendarEvent[] = [
+    new CourseEvent(1,'Curso Básico','2023-11-14T12:00:00','2023-11-14T14:00:00'),
+    new DeliveryEvent(2,'Entrega','2023-11-12T12:00:00','2023-11-12T14:00:00')
   ];
-
   id: number = this.Events.length + 1;
+
+  constructor(private calendarService: CalendarService){
+    let servicesObservable:Observable<CalendarEvent[]>
+    servicesObservable = calendarService.getEvents()
+
+    //Set the events
+    servicesObservable.subscribe((serverServices) => {
+      this.Events = serverServices
+    })
+  }
 
   /* Extra functions */
   chooseColor(type: string): string {
@@ -104,7 +103,7 @@ export class AgendaComponent {
     }
 
     for (let i = 0; i < this.Events.length; i++) {
-      if (this.Events[i].id = this.infoEventId){
+      if (this.Events[i].getId().toString() == this.infoEventId){
         this.Events.splice(i, 1)
       }
     }
@@ -119,7 +118,7 @@ export class AgendaComponent {
 
       if (this.colisionesPosibles(eventRegistered)){
 
-        if(eventRegistered.type == 'Maquillaje' || event.type == 'Maquillaje'){
+        if(eventRegistered.getType() == 'Maquillaje' || event.type == 'Maquillaje'){
           alert("ERROR: El evento que se está tratando de registrar es o colisiona con un servicio de maquillaje, lo cual no es posible  ");
           return
         }
@@ -144,13 +143,13 @@ export class AgendaComponent {
 
     var event;
     for (let i = 0; i < this.Events.length; i++){
-      if (this.Events[i].id == this.infoEventId)
+      if (this.Events[i].getId().toString() == this.infoEventId)
         event = this.Events[i];
     }
 
-    event.title = titleEvent;
-    event.start = this.start;
-    event.end = this.end;
+    event?.setTitle(titleEvent);
+    event?.setStart(this.start);
+    event?.setEnd(this.end);
     
     this.editEvent(event);
 
@@ -193,11 +192,16 @@ export class AgendaComponent {
   }
 
   onUnSelect() {
+    var array1:number[] = [];
+    for (let i = 0; i < this.Events.length; i++) {
+      array1.push(this.Events[i].getId());
+    }
+    alert(array1);
   }
   
   onEventClick(info: any){
     this.infoEventId = info.event.id;
-
+    alert(info.event.id);
     const startSplit = info.event.startStr.split('T');
     const dayEvent = startSplit[0];
     const startTime = startSplit[1].split('-')[0];

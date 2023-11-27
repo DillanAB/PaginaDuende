@@ -171,3 +171,21 @@ exports.sample_Products = [
         description: 'Concealer for personal makeup, beige tone'
     }
 ];
+exports.sample_Events = [
+    {
+      id: 1,
+      title: 'Entrega Pedido 1',
+      start: '2023-11-14T10:30:00',
+      end: '2023-11-14T11:30:00',
+      color: 'red',
+      type: 'Entrega'
+    },
+    {
+      id: 2,
+      title: 'Curso maquillaje avanzado',
+      start: '2023-11-12T11:00:00',
+      end: '2023-11-12T12:00:00',
+      color: 'green',
+      type: 'Curso'
+    }
+];

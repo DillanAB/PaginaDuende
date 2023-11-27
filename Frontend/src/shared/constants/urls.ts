@@ -34,6 +34,9 @@ export const CART_BY_USERID_URL = CART_URL + '/cartbyuserid/'
 export const CART_ADDTOCART_URL = CART_URL + '/addtocart'
 export const CART_CREATEORDER_URL = CART_URL + '/createorder'
 
+//////*********************API Agenda
+export const CALENDAR_URL = BASE_URL +  '/api/calendar'
+export const CALENDAR_ADD_EVENT_URL = CALENDAR_URL + '/addevent'
 
 ////*********************API Usuarios
 export const USER_LOGIN_URL = BASE_URL +  '/api/users/login'
