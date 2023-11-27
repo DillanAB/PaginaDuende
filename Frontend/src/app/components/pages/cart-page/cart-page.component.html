@@ -1,29 +1,33 @@
-<app-title title="Carrito" margin="1.5rem 0 0 2.5rem"></app-title>
-
+<!-- <app-title title="Carrito" margin="1.5rem 0 0 2.5rem"></app-title> -->
+<h1>Carrito</h1>
 <div class="container">
     <ul>
-        <li *ngFor="let cartItem of getProducts(); let idx=index">
+        <li *ngFor="let cartItem of getDetails(); let idx=index">
             <div>
-                <img [src]="cartItem.product.imageURL" [alt]="cartItem.product.name">
+                <img [src]="cartItem.productImageURL" [alt]="cartItem.productName">
             </div>
+            
             <div>
-                <a routerLink="/product/{{cartItem.product.id}}">
-                    {{cartItem.product.name}}
+                <a routerLink="/product/{{cartItem.productId}}">
+                    {{cartItem.productName}}
                 </a>
             </div>
+
             <div>
                 <input 
                     #quantitySelect
                     type="number" 
                     min="1" 
-                    [max]="cartItem.product.availability" 
+                    [max]= "cartItem.price" 
                     [value]="cartItem.quantity"
                     (change)="changeQuantity(cartItem, quantitySelect.value)"
                     >
             </div>
+
             <div>
                 {{cartItem.price | currency}}
             </div>
+            
             <div>
                 <button class="remove-button" (click)="removeFromCart(cartItem)">
                     Eliminar
@@ -33,8 +37,9 @@
     </ul>
     <div class="checkout">
         <div>
-            <div class="products-count">{{cart.getProductsNum()}}</div>
-            <div class="total-price">{{cart.getTotalPrice() | currency}}</div>
+            <div class="products-count">{{cart.totalQuantity}}</div>
+            
+            <div class="total-price">{{cart.price | currency}}</div>
         </div>
         <a routerLink="/pay-page">Finalizar compra</a>
     </div>

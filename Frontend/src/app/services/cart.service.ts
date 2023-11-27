@@ -1,20 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { IAddToCart } from 'src/interfaces/IAddToCart';
+import { ICreateOrder } from 'src/interfaces/ICreateOrder';
+import { CART_ADDTOCART_URL, CART_BY_USERID_URL, CART_CREATEORDER_URL } from 'src/shared/constants/urls';
 import { CartDetail } from 'src/shared/models/CartDetail';
 import { Client } from 'src/shared/models/Client';
 import { Order } from 'src/shared/models/Order';
 import { Product } from 'src/shared/models/Product';
 import { ShoppingCart } from 'src/shared/models/ShoppingCart';
-import { ShopService } from './shop.service';
+
+const CART_KEY = 'Cart'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private shoppingCart: ShoppingCart = this.getCartFromLocalStorage();
-  private cartSubject: BehaviorSubject<ShoppingCart> = new BehaviorSubject(this.shoppingCart);
+  // private shoppingCart!: ShoppingCart;
+  // private cartSubject: BehaviorSubject<ShoppingCart> = new BehaviorSubject(this.shoppingCart);
   
-  constructor(private shopService: ShopService) { 
+  constructor(private http:HttpClient) { 
     //this.clearCart();
   }
 
@@ -22,39 +27,55 @@ export class CartService {
 
   }
 
-  createOrder(client: Client, address: string){
+  // createOrder(client: Client, address: string){
     
+  // }
+
+  //Obtiene el carrito de compras que le corresponde al usuario
+  getCartByUserId(userId:string):Observable<ShoppingCart>{
+    return this.http.get<ShoppingCart>(CART_BY_USERID_URL + userId)
   }
 
-  addToCart(cartDetail: CartDetail): void {
-    let cartItem = this.shoppingCart.products.find(item => item.id === cartDetail.id);
-    if (cartItem)
-      return;
+  //Agrega un producto al carrito de compras
+  addToCart(addData:IAddToCart):Observable<ShoppingCart>{
+    return this.http.post<ShoppingCart>(CART_ADDTOCART_URL, addData)
+  }
+
+  //Crea una orden de compra
+  createOrder(formData:ICreateOrder):Observable<ShoppingCart>{
+    return this.http.post<ShoppingCart>(CART_CREATEORDER_URL, formData)
+  }
+
+
+  // addToCart(cartDetail: CartDetail): void {
+  //   let cartItem = this.shoppingCart.details.find(item => item.id === cartDetail.id);
+  //   if (cartItem)
+  //     return;
     
-    try {this.shoppingCart.addCartDetail(cartDetail);}
-    catch (err) {alert(err)}
+  //   try {this.shoppingCart.addCartDetail(cartDetail);}
+  //   catch (err) {alert(err)}
 
-    this.setCartToLocalStorage();
-  }
+  //   this.setCartToLocalStorage();
+  // }
 
-  editDetailNum(detailID:number, num: number) {
-    let cartDetailSelected = this.shoppingCart.products.find(cartDet => cartDet.id === detailID);
-    if (!cartDetailSelected)
-      return;
-    cartDetailSelected.quantity = num;
-    cartDetailSelected.price = num * cartDetailSelected.product.price;
-    this.setCartToLocalStorage();
-  }
+  // editDetailNum(detailID:number, num: number) {
+  //   let cartDetailSelected = this.cartObservable.details.find(cartDet => cartDet.id === detailID);
+  //   if (!cartDetailSelected)
+  //     return;
+  //   cartDetailSelected.quantity = num;
+  //   cartDetailSelected.price = num * cartDetailSelected.product.price;
+  //   // this.setCartToLocalStorage();
+  // }
 
-  deleteCartDetail(detailID:number) {
-    this.shoppingCart.products = this.shoppingCart.products.filter(cartDetail => cartDetail.id != detailID)
-    this.setCartToLocalStorage();
-  }
+  // deleteCartDetail(detailID:number) {
+  //   this.shoppingCart.details = this.shoppingCart.details.filter(cartDetail => cartDetail.id != detailID)
+  //   // this.setCartToLocalStorage();
+  // }
 
-  clearCart(){
-    this.shoppingCart.reset();
-    localStorage.clear();
-  }
+  // clearCart(){
+  //   this.shoppingCart.reset();
+  //   localStorage.clear();
+  // }
 
   getCartData(): string {
     return "";
@@ -71,28 +92,4 @@ export class CartService {
   setOrderReceipt(receipt: Order){
 
   }
-
-  // AGREGADOS
-
-  getCartObservable(): Observable<ShoppingCart> {
-    return this.cartSubject.asObservable();
-  }
-
-  private setCartToLocalStorage():void {
-    this.shoppingCart.id = 1 //////////////////////////// ARREGLAR
-    this.shoppingCart.client = new Client()//////////////////////////// ARREGLAR
-    const cartJson = JSON.stringify(this.shoppingCart);
-    localStorage.setItem('shoppingCart', cartJson);
-    this.cartSubject.next(this.shoppingCart)
-  }
-
-  private getCartFromLocalStorage():ShoppingCart{
-    const cartJson = localStorage.getItem('shoppingCart') ;
-    return cartJson? new ShoppingCart(cartJson): new ShoppingCart('');
-  }
-
-  buyCart(): void {
-    this.shopService.buyCart(this.shoppingCart);
-  }
-
 }

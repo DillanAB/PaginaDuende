@@ -41,7 +41,9 @@
                     type="text"
                     autocomplete="on">
             </div>
-            <div class="file">
+            <label>Adjunte el comprobante del pago por Sinpe Móvil</label>
+            <input type="file" accept="image/*"  #fileInput (change)="imageFileChange($event)">
+            <!-- <div class="file">
                 <label>Adjunte el comprobante del pago por Sinpe Móvil</label>
                 <input
                     [(ngModel)]="image"
@@ -49,9 +51,9 @@
                     type="file"
                     style="width: 11rem;"
                     accept=".jpg, .JPG, .jpeg, .JPEG, .png, .PNG">
-            </div>
+            </div> -->
             <!-- <img id="comprobante" [src]="image"> -->
-            <button (click)="addOrder()">Completar Compra</button>
+            <button (click)="submitOrder()">Completar Compra</button>
         </div>
     </div>
     

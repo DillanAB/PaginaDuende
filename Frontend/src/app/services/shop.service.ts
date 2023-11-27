@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from 'src/shared/models/Product';
 import { ProductCategory } from 'src/shared/models/ProductCategory';
-import { ProductSubcategory } from 'src/shared/models/ProductSubCategory';
+// import { ProductSubcategory } from 'src/shared/models/ProductSubCategory';
 import { Observable } from 'rxjs';
-import { SHOP_ADDCART, SHOP_BUY, SHOP_CATS_URL, SHOP_PRODUCT_BY_Category_URL, SHOP_PRODUCT_BY_ID_URL, SHOP_PRODUCT_BY_SUBCategory_URL, SHOP_UPLOAD, SHOP_URL } from 'src/shared/constants/urls';
+import { SHOP_BUY, SHOP_CATS_URL, SHOP_PRODUCT_BY_Category_URL, SHOP_PRODUCT_BY_ID_URL, SHOP_PRODUCT_BY_SUBCategory_URL, SHOP_UPLOAD, SHOP_URL } from 'src/shared/constants/urls';
 import { Order } from 'src/shared/models/Order';
 import { ShoppingCart } from 'src/shared/models/ShoppingCart';
 import { CartDetail } from 'src/shared/models/CartDetail';
@@ -38,10 +38,6 @@ export class ShopService {
   //Crea un producto
   createProduct(formData:FormData): Observable<Product> {
     return this.http.post<Product>(SHOP_UPLOAD, formData)
-  }
-
-  addToCart(cartDetail:CartDetail): Observable<Product> {
-    return this.http.post<Product>(SHOP_ADDCART, cartDetail)
   }
 
   buyCart(cart:ShoppingCart):Observable<Order> {

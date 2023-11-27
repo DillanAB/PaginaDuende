@@ -20,7 +20,7 @@ export class Mongo_Product extends DAO_Mongo{
 } 
 
 
-export const DAO_Product_Schema = new Schema<Mongo_Product>(
+export const Mongo_Product_Schema = new Schema<Mongo_Product>(
     {
         name: { type: String, required: true },
         price: { type: Number, required: true },
@@ -41,9 +41,9 @@ export const DAO_Product_Schema = new Schema<Mongo_Product>(
     }
 )
 
-DAO_Product_Schema.methods.setImageURL = function setImageURL(imageName:string) {
+Mongo_Product_Schema.methods.setImageURL = function setImageURL(imageName:string) {
     const {host, port} = config.appConfig
     this.imageURL = `${host}:${port}/public/${imageName}`
 }
 
-export const DAO_Product_Model = model<Mongo_Product>('Product', DAO_Product_Schema)
+export const Mongo_Product_Model = model<Mongo_Product>('Product', Mongo_Product_Schema)
