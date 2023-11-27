@@ -194,3 +194,29 @@ a{
 a:hover{
     cursor: pointer;
 }
+
+.edit, .delete{
+    color: white;
+    border: none;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.edit{
+    background-color: orange;
+}
+
+.delete{
+    background-color: red;
+}
+
+.edit:hover, .delete:hover{
+    cursor: pointer;
+    opacity: 70%;
+}
+
+.evento{
+    background-color: blue;
+}
