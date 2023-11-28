@@ -13,14 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const data_1 = require("../data");
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const Mongo_Product_1 = require("../models/Database/Mongo_Product");
 const SingletonDAO_1 = require("../models/Database/SingletonDAO");
-const data_1 = require("../data");
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const Mongo_ProductSubCategory_1 = require("../models/Database/Mongo_ProductSubCategory");
 const Mongo_ProductCategory_1 = require("../models/Database/Mongo_ProductCategory");
 const ShopView_1 = require("../views/ShopView");
-const express_fileupload_1 = __importDefault(require("express-fileupload"));
+
 // import { Mongo_Tag_Model } from "../models/Database/Mongo_Tag";
 const router = (0, express_1.Router)();
 //Seed, carga datos de los productos cuando la base de datos está vacía

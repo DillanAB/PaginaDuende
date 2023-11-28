@@ -16,7 +16,9 @@
             <p>Hora de inicio</p>
             <input id="startTime" type="time" (change)="evaluate()">
             <p>Hora fin</p>
-            <input id="endTime" type="time" (change)="evaluate()"><br/>
+            <input id="endTime" type="time" (change)="evaluate()">
+            <p>Detalles</p>
+            <textarea id="details" style="height: 5rem;" (change)="evaluate()"></textarea><br/>
 
             <button id="editEvent" class="edit" hidden="true" (click)="editClick()">Editar</button>
             <button id="deleteEvent" class="delete" hidden="true" (click)="deleteClick()">Eliminar</button>

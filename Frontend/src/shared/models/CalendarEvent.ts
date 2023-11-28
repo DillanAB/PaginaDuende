@@ -6,4 +6,5 @@ export interface CalendarEvent{
     setTitle(title:string) : void;
     setStart(start:string) : void;
     setEnd(end:string) : void;
+    setDetails(details:string) : void;
 }

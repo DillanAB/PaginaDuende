@@ -23,8 +23,8 @@ export class AgendaComponent {
   end!:string;
   infoEventId!:string;
   Events:CalendarEvent[] = [
-    new CourseEvent(1,'Curso Básico','2023-11-14T12:00:00','2023-11-14T14:00:00'),
-    new DeliveryEvent(2,'Entrega','2023-11-12T12:00:00','2023-11-12T14:00:00')
+    new CourseEvent(1,'Curso Básico','2023-11-13T12:00:00','2023-11-13T14:00:00',''),
+    new DeliveryEvent(2,'Entrega','2023-11-15T12:00:00','2023-11-15T14:00:00','Id de Pedido: 1\nCliente: Juan Perez')
   ];
   id: number = this.Events.length + 1;
 
@@ -58,7 +58,7 @@ export class AgendaComponent {
     return colorEvent;
   }
 
-  createEvent(title: string, type:string){
+  createEvent(title: string, type:string, details:string){
     // const event = {
     //   id: this.id,
     //   title: title,
@@ -69,11 +69,11 @@ export class AgendaComponent {
     // };
     var event;
     if (type == "Maquillaje")
-      event = new MakeupEvent(this.id, title, this.start, this.end)
+      event = new MakeupEvent(this.id, title, this.start, this.end, details)
     else if (type == "Curso")
-      event = new CourseEvent(this.id, title, this.start, this.end)
+      event = new CourseEvent(this.id, title, this.start, this.end, details)
     else
-      event = new DeliveryEvent(this.id, title, this.start, this.end)
+      event = new DeliveryEvent(this.id, title, this.start, this.end, details)
     this.id++;
     return event;
   }
@@ -119,7 +119,8 @@ export class AgendaComponent {
   actionClick(type:string){
     
     var titleEvent = (document.getElementById('title') as HTMLInputElement).value;
-    const event = this.createEvent(titleEvent,type);
+    var details = (document.getElementById('details') as HTMLTextAreaElement).value;
+    const event = this.createEvent(titleEvent,type, details);
 
     for (let i = 0; i < this.Events.length; i++) {
       const eventRegistered = this.Events[i]
@@ -144,7 +145,7 @@ export class AgendaComponent {
 
   editClick(){
     const config = this.getConfigurations();
-    const titleEvent = config[0], dayEvent = config[1], startTime = config[2], endTime = config[3];
+    const titleEvent = config[0], dayEvent = config[1], startTime = config[2], endTime = config[3], details = config[4];
 
     this.start = dayEvent + 'T' + startTime;
     this.end = dayEvent + 'T' + endTime;
@@ -158,6 +159,7 @@ export class AgendaComponent {
     event?.setTitle(titleEvent);
     event?.setStart(this.start);
     event?.setEnd(this.end);
+    event?.setDetails(details)
     if (event)
       this.editEvent(event);
 
@@ -188,9 +190,9 @@ export class AgendaComponent {
 
   evaluate(){
     const config = this.getConfigurations();
-    const title = config[0], dayEvent = config[1], startTime = config[2], endTime = config[3]; 
+    const title = config[0], dayEvent = config[1], startTime = config[2], endTime = config[3];//, details = config[4]; 
     
-    if (startTime != '' && endTime != '' && dayEvent != '' && title != '') {
+    if (startTime != '' && endTime != '' && dayEvent != '' && title != ''){// && details != '') {
       this.start = dayEvent + 'T' + startTime
       this.end = dayEvent + 'T' + endTime
       this.controlButtonsAdd(false);
@@ -208,6 +210,7 @@ export class AgendaComponent {
   }
   
   onEventClick(info: any){
+    alert("Título: " + info.event.title + "\nInicio Evento: " + info.event.start + "\nFin Evento: " + info.event.end)
     this.infoEventId = info.event.id;
     //alert(info.event.id);
     const startSplit = info.event.startStr.split('T');
@@ -251,8 +254,9 @@ export class AgendaComponent {
     const dayEvent = (document.getElementById('dayEvent') as HTMLInputElement).value
     const startTime = (document.getElementById('startTime') as HTMLInputElement).value
     const endTime = (document.getElementById('endTime') as HTMLInputElement).value
+    const details = (document.getElementById('details') as HTMLTextAreaElement).value
     
-    return [title, dayEvent, startTime, endTime]
+    return [title, dayEvent, startTime, endTime, details]
   }
 
   setStateButtons_Edit_Delete(active: boolean){

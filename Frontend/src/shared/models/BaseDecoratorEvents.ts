@@ -8,12 +8,14 @@ export class BaseDecoratorEvents implements CalendarEvent{
     end !: string;
     color !: string;
     type !: string;
+    details !: string;
 
-    constructor(id: number, title: string, start:string, end: string){
+    constructor(id: number, title: string, start:string, end: string, details:string){
         this.id = id;
         this.title = title;
         this.start = start;
         this.end = end;
+        this.details = details;
     }
 
     
@@ -43,5 +45,9 @@ export class BaseDecoratorEvents implements CalendarEvent{
 
     public setEnd(end:string) : void {
         this.end = end;
+    }
+
+    public setDetails(details:string) : void {
+        this.details = details;
     }
 }
