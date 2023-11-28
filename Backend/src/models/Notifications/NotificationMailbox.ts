@@ -4,7 +4,6 @@ import { Observer } from "./Observer";
 export class NotificationMailbox implements Observer {
   userId:string;
 
-
   constructor(userId:string) {
     this.userId = userId;
   }
