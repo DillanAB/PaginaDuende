@@ -15,12 +15,8 @@ const CART_KEY = 'Cart'
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-  // private shoppingCart!: ShoppingCart;
-  // private cartSubject: BehaviorSubject<ShoppingCart> = new BehaviorSubject(this.shoppingCart);
-  
+export class CartService {  
   constructor(private http:HttpClient) { 
-    //this.clearCart();
   }
 
   createOrderDetail(product: Product, num: number){

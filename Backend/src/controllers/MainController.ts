@@ -1,4 +1,6 @@
+import { AdminCart } from "./AdminCart"
 import { AdminGallery } from "./AdminGallery"
+import { AdminNotifications } from "./AdminNotifications"
 import { AdminShop } from "./AdminShop"
 import { AdminUser } from "./AdminUser"
 
@@ -6,6 +8,8 @@ export class MainController {
     adminUser:AdminUser = new AdminUser()
     adminGallery:AdminGallery = new AdminGallery()
     adminShop:AdminShop = new AdminShop()
+    adminNotifications:AdminNotifications = new AdminNotifications()
+    adminCart:AdminCart = new AdminCart()  
 
     constructor() { }
 
@@ -95,14 +99,6 @@ export class MainController {
         return (this.adminShop.editSubCategory(jsonData))
     }
 
-    public addToCart(jsonData:any){
-        return (this.adminShop.addToCart(jsonData))
-    }
-
-    public buyCart(jsonData:any){
-        return (this.adminShop.buyCart(jsonData))
-    }
-
     //****************Users*******************
 
     public login(jsonUser:any){
@@ -112,4 +108,24 @@ export class MainController {
     public register(jsonUser:any){
         return (this.adminUser.register(jsonUser))
     }
+
+    //****************Notifications*******************
+    public getNotifications(userId:string){
+        return (this.adminNotifications.getNotifications(userId))
+    }
+
+    //****************Carrito*******************
+    public getCartByUserId(userId:string){
+        return (this.adminCart.getCartByUserId(userId))
+    }
+    //Agregar al carrito
+    public addToCart(jsonData:any){
+        return (this.adminCart.addToCart(jsonData))
+    }
+    //Crea la orden de compra
+    public buyCart(jsonData:any, image:any){
+        return (this.adminCart.buyCart(jsonData, image))
+    }
+
 }   
+

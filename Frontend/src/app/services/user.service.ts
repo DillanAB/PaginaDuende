@@ -4,7 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUserLogin } from 'src/interfaces/IUserLogin';
 import { IUserRegister } from 'src/interfaces/IUserRegister';
-import { USER_LOGIN_URL, USER_REGISTER_URL } from 'src/shared/constants/urls';
+import { NOTIFICATION_URL, USER_LOGIN_URL, USER_REGISTER_URL } from 'src/shared/constants/urls';
+import { NNotification } from 'src/shared/models/Notification';
 import { User } from 'src/shared/models/User';
 
 const USER_KEY = 'User'
@@ -47,6 +48,11 @@ export class UserService {
         }
       })
     )
+  }
+
+  //Obtiene las notificaciones de un usuario
+  getNotifications(userId:string):Observable<NNotification[]>{
+    return this.http.get<NNotification[]>(NOTIFICATION_URL + userId)
   }
 
   isAdmin():boolean{

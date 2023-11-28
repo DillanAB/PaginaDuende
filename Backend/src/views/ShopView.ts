@@ -51,13 +51,21 @@ export class ShopView extends View {
         return (new MainController().editProductSubCategory(jsonData))
     }
 
+    //Carrito
+    public getCartByUserId(req: any) {
+        const userId = req.params.id
+        return (new MainController().getCartByUserId(userId))
+    }
+    
     public addToCart(req: any) {
         const jsonData = req.body
         return (new MainController().addToCart(jsonData))
     }
-
+    //Crea la orden de compra
     public buyConfirmation(req: any) {
-        const jsonData = JSON.parse(req.body.data)
-        return (new MainController().buyCart(jsonData))
+        const jsonData = req.body
+        // const image = req.files.image as fileUpload.UploadedFile
+        const image = '1'
+        return (new MainController().buyCart(jsonData, image))
     }
 }
